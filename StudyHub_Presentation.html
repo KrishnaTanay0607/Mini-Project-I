@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>StudyHub – Industrial Internship Presentation</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Open+Sans:wght@400;600;700&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Open Sans', sans-serif;
+    background: #111;
+  }
+
+  /* ── Each slide is 960×540 (16:9) ── */
+  .slide {
+    width: 960px;
+    height: 540px;
+    background: linear-gradient(135deg, #1a8fc1 0%, #1aada0 50%, #1ac4a0 100%);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    page-break-after: always;
+    margin: 0 auto 40px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+  }
+
+  /* subtle pattern overlay */
+  .slide::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 80% 20%, rgba(255,255,255,.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 20% 80%, rgba(0,0,0,.12) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  h1.slide-title {
+    font-family: 'Merriweather', serif;
+    font-size: 46px;
+    font-weight: 900;
+    color: #000;
+    text-align: center;
+    line-height: 1.2;
+    text-shadow: 1px 1px 0 rgba(255,255,255,.3);
+    position: relative;
+    z-index: 1;
+  }
+
+  h2.slide-subtitle {
+    font-family: 'Merriweather', serif;
+    font-size: 30px;
+    font-weight: 700;
+    color: #0a2a3a;
+    text-align: center;
+    margin-top: 14px;
+    position: relative;
+    z-index: 1;
+  }
+
+  p.slide-sub {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    color: #0a2a3a;
+    text-align: center;
+    margin-top: 6px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── 2-col info grid ── */
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    width: 80%;
+    margin-top: 50px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .info-box {
+    text-align: left;
+  }
+
+  .info-box .label {
+    font-size: 13px;
+    font-weight: 700;
+    color: #0a2a3a;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+
+  .info-box .value {
+    font-size: 14px;
+    color: #0a2a3a;
+    line-height: 1.6;
+  }
+
+  /* ── Agenda cards ── */
+  .agenda-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    width: 86%;
+    margin-top: 30px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .agenda-card {
+    background: rgba(255,255,255,.18);
+    border: 1px solid rgba(255,255,255,.35);
+    border-radius: 14px;
+    padding: 16px 20px;
+    backdrop-filter: blur(6px);
+  }
+
+  .agenda-card .card-title {
+    font-family: 'Merriweather', serif;
+    font-size: 13px;
+    font-weight: 900;
+    color: #000;
+    margin-bottom: 8px;
+  }
+
+  .agenda-card .card-item {
+    font-size: 12px;
+    color: #0a2a3a;
+    line-height: 1.8;
+  }
+
+  /* ── Content slides ── */
+  .content-slide {
+    align-items: flex-start;
+    padding: 40px 60px;
+  }
+
+  .sec-title {
+    font-family: 'Merriweather', serif;
+    font-size: 38px;
+    font-weight: 900;
+    color: #000;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 28px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .sec-subtitle {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: #000;
+    text-align: center;
+    margin-top: -22px;
+    margin-bottom: 22px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+  }
+
+  .bubble {
+    background: rgba(255,255,255,.18);
+    border: 1px solid rgba(255,255,255,.4);
+    border-radius: 14px;
+    padding: 16px 20px;
+    backdrop-filter: blur(4px);
+  }
+
+  .bubble-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 8px;
+  }
+
+  .bullet {
+    font-size: 12px;
+    color: #0a2a3a;
+    line-height: 1.85;
+    padding-left: 2px;
+  }
+
+  .bullet li { list-style: none; }
+  .bullet li::before { content: '• '; color: #000; font-weight: 700; }
+
+  /* ── Tech table ── */
+  table.tech {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    position: relative;
+    z-index: 1;
+  }
+
+  table.tech th {
+    background: rgba(0,0,0,.18);
+    color: #000;
+    font-weight: 700;
+    padding: 9px 14px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,.3);
+  }
+
+  table.tech td {
+    background: rgba(255,255,255,.12);
+    color: #0a2a3a;
+    padding: 8px 14px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,.2);
+  }
+
+  table.tech tr:hover td { background: rgba(255,255,255,.22); }
+
+  /* ── Architecture flow ── */
+  .arch-flow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    margin-top: 8px;
+  }
+
+  .arch-box {
+    background: rgba(255,255,255,.2);
+    border: 1px solid rgba(255,255,255,.45);
+    border-radius: 12px;
+    padding: 14px 16px;
+    text-align: center;
+    min-width: 130px;
+    backdrop-filter: blur(4px);
+  }
+
+  .arch-box .ab-icon { font-size: 24px; margin-bottom: 5px; }
+  .arch-box .ab-title { font-size: 12px; font-weight: 700; color: #000; }
+  .arch-box .ab-sub { font-size: 10px; color: #0a2a3a; margin-top: 3px; line-height: 1.5; }
+
+  .arch-arrow {
+    font-size: 22px;
+    color: #000;
+    padding: 0 6px;
+    font-weight: 900;
+  }
+
+  /* ── Features grid ── */
+  .feat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+  }
+
+  .feat-card {
+    background: rgba(255,255,255,.18);
+    border: 1px solid rgba(255,255,255,.35);
+    border-radius: 12px;
+    padding: 14px 16px;
+    text-align: center;
+    backdrop-filter: blur(4px);
+  }
+
+  .feat-card .fc-icon { font-size: 26px; margin-bottom: 6px; }
+  .feat-card .fc-title { font-size: 12px; font-weight: 700; color: #000; margin-bottom: 4px; }
+  .feat-card .fc-desc { font-size: 10.5px; color: #0a2a3a; line-height: 1.5; }
+
+  /* ── SDG / conclusion cards ── */
+  .conc-row {
+    display: flex;
+    gap: 14px;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+  }
+
+  .conc-card {
+    flex: 1;
+    background: rgba(255,255,255,.18);
+    border: 1px solid rgba(255,255,255,.35);
+    border-radius: 12px;
+    padding: 16px 18px;
+    backdrop-filter: blur(4px);
+  }
+
+  .conc-card .cc-title { font-size: 13px; font-weight: 700; color: #000; margin-bottom: 8px; }
+  .conc-card .cc-item { font-size: 12px; color: #0a2a3a; line-height: 1.85; }
+  .conc-card .cc-item li { list-style: none; }
+  .conc-card .cc-item li::before { content: '✅ '; }
+
+  /* print */
+  @media print {
+    body { background: white; }
+    .slide { margin: 0; box-shadow: none; page-break-after: always; }
+  }
+
+  /* slide counter */
+  .slide-num {
+    position: absolute;
+    bottom: 12px;
+    right: 18px;
+    font-size: 10px;
+    color: rgba(0,0,0,.45);
+    font-weight: 700;
+    z-index: 10;
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 1 — TITLE SLIDE                                         -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+<div class="slide">
+  <h1 class="slide-title">INDUSTRIAL INTERNSHIP - II</h1>
+  <h2 class="slide-subtitle">📚 STUDYHUB</h2>
+  <p class="slide-sub">A Real-Time Collaborative Study Platform</p>
+
+  <div class="info-grid">
+    <div class="info-box">
+      <div class="label">UNDER THE GUIDANCE OF</div>
+      <div class="value">
+        [Guide Name]<br/>
+        Assistant Professor, [Department]<br/>
+        [College Name]
+      </div>
+    </div>
+    <div class="info-box" style="text-align:right;">
+      <div class="label">TEAM MEMBERS</div>
+      <div class="value">
+        DSC (Developer)<br/>
+        [Student Name 2]<br/>
+        [Student Name 3]
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">1 / 10</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 2 — AGENDA                                              -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+<div class="slide">
+  <h1 class="slide-title" style="font-size:40px; margin-bottom:0;">AGENDA</h1>
+
+  <div class="agenda-grid">
+    <div class="agenda-card">
+      <div class="card-title">PROJECT OVERVIEW</div>
+      <div class="card-item">Introduction &amp; Motivation<br/>Problem Statement<br/>Objectives</div>
+    </div>
+    <div class="agenda-card">
+      <div class="card-title">RESULTS &amp; OUTCOMES</div>
+      <div class="card-item">Key Features Demo<br/>Challenges Faced<br/>Future Scope</div>
+    </div>
+    <div class="agenda-card">
+      <div class="card-title">TECHNICAL IMPLEMENTATION</div>
+      <div class="card-item">Technologies Used<br/>System Architecture<br/>Methodology (MERN + Socket.io)</div>
+    </div>
+    <div class="agenda-card">
+      <div class="card-title">CONCLUSION</div>
+      <div class="card-item">Key Achievements<br/>SDG Alignment<br/>References</div>
+    </div>
+  </div>
+  <div class="slide-num">2 / 10</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 3 — INTRODUCTION                                        -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+<div class="slide content-slide">
+  <div class="sec-title">INTRODUCTION</div>
+
+  <div class="two-col">
+    <div>
+      <div class="bubble" style="margin-bottom:14px;">
+        <div class="bubble-title">PROJECT VISION</div>
+        <ul class="bullet">
+          <li>Build a full-stack real-time collaborative study platform</li>
+          <li>Help students form study groups and share resources</li>
+          <li>Enable live peer-to-peer communication and note-sharing</li>
+        </ul>
+      </div>
+      <div class="bubble">
+        <div class="bubble-title">MOTIVATION</div>
+        <ul class="bullet">
+          <li>Students lack a unified tool for study collaboration</li>
+          <li>Existing platforms don't combine notes + chat + files</li>
+          <li>Remote learning needs real-time coordination tools</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="bubble">
+        <div class="bubble-title">KEY FEATURES</div>
+        <ul class="bullet">
+          <li>Study groups with live chat &amp; member management</li>
+          <li>Collaborative notes with auto-save to database</li>
+          <li>File/resource library with upvotes &amp; comments</li>
+          <li>Friend system with real-time notifications</li>
+          <li>Pomodoro focus timer</li>
+          <li>Meeting link sharing within groups</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">3 / 10</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 4 — PROBLEM STATEMENT & OBJECTIVES                      -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+<div class="slide content-slide">
+  <div class="sec-title">PROBLEM STATEMENT &amp; OBJECTIVES</div>
+
+  <div class="two-col">
+    <div class="bubble">
+      <div class="bubble-title">PROBLEM STATEMENT</div>
+      <ul class="bullet">
+        <li>No single platform for group-based study collaboration</li>
+        <li>Notes and files scattered across multiple apps</li>
+        <li>Lack of real-time communication during study sessions</li>
+        <li>No way to track shared resources within a study group</li>
+        <li>Difficult to coordinate meeting times and links</li>
+      </ul>
+    </div>
+    <div class="bubble">
+      <div class="bubble-title">KEY OBJECTIVES</div>
+      <ul class="bullet">
+        <li>Create persistent, DB-backed collaborative notes</li>
+        <li>Provide real-time group chat powered by Socket.io</li>
+        <li>Build a friend system with instant notifications</li>
+        <li>Enable file uploads with group-level visibility</li>
+        <li>Secure all data with JWT-based authentication</li>
+        <li>Ensure auto-save, live updates, and push notifications</li>
+      </ul>
+    </div>
+  </div>
+  <div class="slide-num">4 / 10</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 5 — TECHNOLOGIES (FRONTEND)                             -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+<div class="slide content-slide">
+  <div class="sec-title">TECHNOLOGIES USED</div>
+  <div class="sec-subtitle">(FRONTEND)</div>
+
+  <div class="two-col" style="align-items:start; gap:24px;">
+    <div style="position:relative;z-index:1;">
+      <div class="bubble" style="margin-bottom:14px;">
+        <div class="bubble-title">KEY STRENGTHS</div>
+        <ul class="bullet">
+          <li>Component-based reactive UI</li>
+          <li>Real-time updates without page reload</li>
+          <li>Context API for global state management</li>
+          <li>Responsive dark-mode design</li>
+        </ul>
+      </div>
+    </div>
+    <div style="position:relative;z-index:1;">
+      <table class="tech">
+        <tr><th>Technology</th><th>Purpose</th></tr>
+        <tr><td>React 18</td><td>Component-based SPA UI</td></tr>
+        <tr><td>Socket.io-client</td><td>Real-time WebSocket events</td></tr>
+        <tr><td>Context API</td><td>Auth &amp; Socket state management</td></tr>
+        <tr><td>Vanilla CSS</td><td>Custom dark-mode design system</td></tr>
+        <tr><td>Fetch API</td><td>REST API communication</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="slide-num">5 / 10</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 6 — TECHNOLOGIES (BACKEND)                              -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+<div class="slide content-slide">
+  <div class="sec-title">TECHNOLOGIES USED</div>
+  <div class="sec-subtitle">(BACKEND)</div>
+
+  <div class="two-col" style="align-items:start; gap:24px;">
+    <div style="position:relative;z-index:1;">
+      <div class="bubble">
+        <div class="bubble-title">KEY STRENGTHS</div>
+        <ul class="bullet">
+          <li>Non-blocking async I/O with Node.js</li>
+          <li>JWT-secured REST API endpoints</li>
+          <li>Persistent cloud DB via MongoDB Atlas</li>
+          <li>Real-time bidirectional events via Socket.io</li>
+          <li>File upload support up to 50 MB via Multer</li>
+        </ul>
+      </div>
+    </div>
+    <div style="position:relative;z-index:1;">
+      <table class="tech">
+        <tr><th>Technology</th><th>Purpose</th></tr>
+        <tr><td>Node.js + Express</td><td>REST API server</td></tr>
+        <tr><td>MongoDB Atlas</td><td>Cloud NoSQL database</td></tr>
+        <tr><td>Mongoose</td><td>Schema &amp; data modelling</td></tr>
+        <tr><td>Socket.io</td><td>Real-time event broadcast</td></tr>
+        <tr><td>JWT + bcryptjs</td><td>Authentication &amp; security</td></tr>
+        <tr><td>Multer</td><td>File upload middleware</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="slide-num">6 / 10</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 7 — SYSTEM ARCHITECTURE                                 -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+<div class="slide content-slide">
+  <div class="sec-title">SYSTEM ARCHITECTURE</div>
+
+  <div class="arch-flow">
+    <div class="arch-box">
+      <div class="ab-icon">🖥️</div>
+      <div class="ab-title">React Frontend</div>
+      <div class="ab-sub">Port 3000<br/>SPA + Socket.io-client</div>
+    </div>
+    <div class="arch-arrow">⇄</div>
+    <div class="arch-box">
+      <div class="ab-icon">⚙️</div>
+      <div class="ab-title">Express + Socket.io</div>
+      <div class="ab-sub">Port 5000<br/>REST API + WebSockets</div>
+    </div>
+    <div class="arch-arrow">⇄</div>
+    <div class="arch-box">
+      <div class="ab-icon">🍃</div>
+      <div class="ab-title">MongoDB Atlas</div>
+      <div class="ab-sub">Cloud NoSQL<br/>Users, Notes, Groups</div>
+    </div>
+  </div>
+
+  <div class="feat-grid" style="margin-top:20px;">
+    <div class="feat-card">
+      <div class="fc-icon">🔐</div>
+      <div class="fc-title">JWT Auth Flow</div>
+      <div class="fc-desc">bcryptjs hashes passwords. JWT tokens secure every API call.</div>
+    </div>
+    <div class="feat-card">
+      <div class="fc-icon">⚡</div>
+      <div class="fc-title">Real-Time Engine</div>
+      <div class="fc-desc">Socket.io rooms per group. Events: chat, notes, files, friend requests.</div>
+    </div>
+    <div class="feat-card">
+      <div class="fc-icon">📁</div>
+      <div class="fc-title">File Handling</div>
+      <div class="fc-desc">Multer saves uploads to /uploads. MongoDB stores metadata &amp; path.</div>
+    </div>
+  </div>
+  <div class="slide-num">7 / 10</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 8 — KEY FEATURES / RESULTS                              -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+<div class="slide content-slide">
+  <div class="sec-title">KEY FEATURES &amp; RESULTS</div>
+
+  <div class="feat-grid">
+    <div class="feat-card">
+      <div class="fc-icon">📝</div>
+      <div class="fc-title">Collaborative Notes</div>
+      <div class="fc-desc">Markdown editor with 1.2s auto-save to MongoDB. Personal  + group notes.</div>
+    </div>
+    <div class="feat-card">
+      <div class="fc-icon">👥</div>
+      <div class="fc-title">Study Groups</div>
+      <div class="fc-desc">Create / join groups. Live member count, group chat, meeting links.</div>
+    </div>
+    <div class="feat-card">
+      <div class="fc-icon">💬</div>
+      <div class="fc-title">Real-Time Chat</div>
+      <div class="fc-desc">Socket.io group rooms. Instant messages persist to MongoDB.</div>
+    </div>
+    <div class="feat-card">
+      <div class="fc-icon">🔔</div>
+      <div class="fc-title">Push Notifications</div>
+      <div class="fc-desc">Live toast popups for notes, files, friend requests (with Accept/Decline).</div>
+    </div>
+    <div class="feat-card">
+      <div class="fc-icon">📚</div>
+      <div class="fc-title">Resource Library</div>
+      <div class="fc-desc">Upload files per group. Upvotes, comments, inline preview (PDF/MD/img).</div>
+    </div>
+    <div class="feat-card">
+      <div class="fc-icon">⏱️</div>
+      <div class="fc-title">Focus Timer</div>
+      <div class="fc-desc">Pomodoro-style study timer to boost productivity and track sessions.</div>
+    </div>
+  </div>
+  <div class="slide-num">8 / 10</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 9 — CHALLENGES & FUTURE SCOPE                           -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+<div class="slide content-slide">
+  <div class="sec-title">CHALLENGES &amp; FUTURE SCOPE</div>
+
+  <div class="two-col">
+    <div class="bubble">
+      <div class="bubble-title">CHALLENGES FACED</div>
+      <ul class="bullet">
+        <li>MongoDB Atlas DNS resolution on certain ISPs (fixed via Google DNS override)</li>
+        <li>Stale closure bugs in debounced auto-save (solved with useRef)</li>
+        <li>Socket.io room management for multi-group users</li>
+        <li>Merging live DB notes with local seed data cleanly</li>
+        <li>CORS &amp; JWT token propagation with Socket.io handshake</li>
+      </ul>
+    </div>
+    <div class="bubble">
+      <div class="bubble-title">FUTURE SCOPE</div>
+      <ul class="bullet">
+        <li>AI-powered note summarisation using an LLM API</li>
+        <li>Video/audio study rooms (WebRTC integration)</li>
+        <li>Mobile app (React Native)</li>
+        <li>Export notes as PDF or Notion pages</li>
+        <li>Offline mode with background sync</li>
+        <li>Gamification — streaks, badges, leaderboards</li>
+      </ul>
+    </div>
+  </div>
+  <div class="slide-num">9 / 10</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 10 — CONCLUSION                                         -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+<div class="slide content-slide">
+  <div class="sec-title">CONCLUSION</div>
+
+  <div class="conc-row">
+    <div class="conc-card">
+      <div class="cc-title">KEY ACHIEVEMENTS</div>
+      <ul class="cc-item">
+        <li>Full-stack MERN app with real-time features</li>
+        <li>Notes auto-saved to MongoDB Atlas cloud DB</li>
+        <li>Instant push notifications via Socket.io</li>
+        <li>Friend system with inline Accept/Decline</li>
+        <li>Secure JWT authentication throughout</li>
+        <li>File library with preview &amp; upvote system</li>
+      </ul>
+    </div>
+    <div class="conc-card">
+      <div class="cc-title">SDG ALIGNMENT</div>
+      <ul class="cc-item">
+        <li><strong>SDG 4</strong> – Quality Education: collaborative learning tools</li>
+        <li><strong>SDG 9</strong> – Innovation: real-time web technology</li>
+        <li><strong>SDG 10</strong> – Reduced Inequalities: free access to study resources</li>
+        <li><strong>SDG 17</strong> – Partnerships: peer-to-peer knowledge sharing</li>
+      </ul>
+      <div style="margin-top:12px; font-size:12px; color:#0a2a3a; font-weight:700; text-align:center;">
+        📚 StudyHub — Study Smarter, Together
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">10 / 10</div>
+</div>
+
+</body>
+</html>
